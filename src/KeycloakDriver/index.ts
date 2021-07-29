@@ -174,10 +174,10 @@ export class KeycloakDriver extends Oauth2Driver<KeycloakDriverAccessToken, Keyc
     return {
       id: body.sub,
       nickName: body.preferred_username,
-      name: body.preferred_username,
-      email: null,
+      name: body.name,
+      email: body.email,
       avatarUrl: null,
-      emailVerificationState: 'unsupported' as const,
+      emailVerificationState: body.email_verified ? ('verified' as const) : ('unverified' as const),
       original: body,
     }
   }
